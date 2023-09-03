@@ -3,9 +3,9 @@ using VRTX.Net;
 
 namespace Gallery.FlickrAPIIntegration.Endpoints
 {
-    public class PhotosSearch : SoapOperation<EchoRequest, EchoResponse, Echo>
+    public class PhotosSearch : SoapOperation<PhotosSearchRequest, PhotosSearchResponse, PhotosSearch>
     {
-        public PhotosSearch () : base("echo") { }
+        public PhotosSearch () : base("photosSearch") { }
     }
 
     [XmlRoot(ElementName = "FlickrResponse", Namespace = Config.NAMESPACE)]
@@ -25,7 +25,7 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
         [XmlElement("extras")]
         public string Extras { get; set; }
         [XmlElement("per_page")]
-        public string PerPage { get; set; }
+        public int PerPage { get; set; }
         
     }
 }

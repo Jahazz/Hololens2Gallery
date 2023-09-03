@@ -11,7 +11,7 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
             };
         }
 
-        public static PhotosSearchRequest GetPhotosSearchRequest (string text, string perPage)
+        public static PhotosSearchRequest GetPhotosSearchRequest (string text, int perPage)
         {
             return new PhotosSearchRequest()
             {
