@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using VRTX.Net;
 
@@ -11,8 +12,23 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
     [XmlRoot(ElementName = "FlickrResponse", Namespace = Config.NAMESPACE)]
     public class PhotosSearchResponse : SoapResponseType
     {
-        [XmlElement("value")]
-        public string Value { get; set; }
+        [XmlArray("photos")]
+        [XmlArrayItem(typeof(Photo), ElementName = "photo")]
+        public List<Photo> PhotoCollection { get; set; }
+    }
+
+    public class Photos
+    {
+        [XmlArrayItem("photo")]
+        public List<Photo> PhotoCollection { get; set; }
+    }
+
+    public class Photo
+    {
+        [XmlAttribute(AttributeName = "url_s")]
+        public string ThumbnailUrl { get; set; }
+        [XmlAttribute(AttributeName = "url_c")]
+        public string MediumUrl { get; set; }
     }
 
     [XmlRoot(ElementName = "FlickrRequest", Namespace = Config.NAMESPACE)]
