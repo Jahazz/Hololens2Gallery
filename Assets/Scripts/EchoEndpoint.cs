@@ -19,7 +19,7 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
     public class EchoRequest : SoapRequestType
     {
         [XmlElement("method")]
-        public string Method { get; set; } = "flickr.test.echo";
+        public string Method { get; set; }
         [XmlElement("value")]
         public string Value { get; set; }
     }
