@@ -1,6 +1,6 @@
 namespace Gallery.FlickrAPIIntegration
 {
-    public static class Config
+    public static class SoapConfig
     {
         public const string API_URL = "https://www.flickr.com/services/soap/";
         public const string NAMESPACE = "http://flickr.com/ns/api#";

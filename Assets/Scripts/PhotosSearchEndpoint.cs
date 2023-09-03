@@ -9,7 +9,7 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
         public PhotosSearch () : base("photosSearch") { }
     }
 
-    [XmlRoot(ElementName = "FlickrResponse", Namespace = Config.NAMESPACE)]
+    [XmlRoot(ElementName = "FlickrResponse", Namespace = SoapConfig.NAMESPACE)]
     public class PhotosSearchResponse : SoapResponseType
     {
         [XmlArray("photos")]
@@ -31,7 +31,7 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
         public string MediumUrl { get; set; }
     }
 
-    [XmlRoot(ElementName = "FlickrRequest", Namespace = Config.NAMESPACE)]
+    [XmlRoot(ElementName = "FlickrRequest", Namespace = SoapConfig.NAMESPACE)]
     public class PhotosSearchRequest : SoapRequestType
     {
         [XmlElement("method")]

@@ -6,9 +6,9 @@ namespace Gallery.FlickrAPIIntegration.Client
 {
     public class FlickrSoapClient : SoapClient
     {
-        private string ApiKey { get; set; } = Config.API_KEY;
+        private string ApiKey { get; set; } = SoapConfig.API_KEY;
 
-        public FlickrSoapClient () : base(Config.API_URL, Config.NAMESPACE)
+        public FlickrSoapClient () : base(SoapConfig.API_URL, SoapConfig.NAMESPACE)
         {
 
         }
