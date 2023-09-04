@@ -737,7 +737,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 00814c02bffdda01
+  metroCertificateNotAfter: 80061dd939feda01
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: Gallery
