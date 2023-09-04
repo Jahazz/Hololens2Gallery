@@ -30,6 +30,18 @@ namespace Gallery.GUI
 
             CurrentView.SetElementCountLabel(ElementCount);
             CurrentView.SetSliderValue((float)ElementCount / SoapConfig.MAX_ELEMENT_COUNT);
+            CurrentView.SetSearchText(DefaultSearchText);
+        }
+
+        public void ShowKeyboard ()
+        {
+            CurrentView.ShowKeyboard(SearchText);
+        }
+
+        public void SetSearchText (string searchText)
+        {
+            SearchText = searchText;
+            CurrentView.SetSearchText(searchText);
         }
     }
 }

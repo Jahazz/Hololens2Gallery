@@ -11,5 +11,15 @@ namespace Gallery.GUI
         {
             CurrentModel.SetElementCount(sliderData.NewValue);
         }
+
+        public void ShowKeyboard ()
+        {
+            CurrentModel.ShowKeyboard();
+        }
+
+        public void HandleOnKeyboardCommit (string text)
+        {
+            CurrentModel.SetSearchText(text);
+        }
     }
 }
