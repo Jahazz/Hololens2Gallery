@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
+using Codebase.Utils;
 
 namespace Gallery.FlickrAPIIntegration.Mediator
 {
@@ -20,7 +21,7 @@ namespace Gallery.FlickrAPIIntegration.Mediator
             StartCoroutine(SearchForPhotosByNameCoroutine(queryText, maxItemCount, callback));
         }
 
-        public void RequestImageFromUrl (string urlToImage, Action<Sprite> callback)
+        public ImageRequest RequestImageFromUrl (string urlToImage, Action<Sprite> callback)
         {
             ImageRequest request = new ImageRequest(urlToImage, callback);
             ImageRequestQueue.Enqueue(request);
@@ -29,6 +30,7 @@ namespace Gallery.FlickrAPIIntegration.Mediator
             {
                 StartCoroutine(HandleImageRequestQueue());
             }
+            return request;
         }
 
         protected virtual void Start ()
@@ -54,26 +56,20 @@ namespace Gallery.FlickrAPIIntegration.Mediator
         {
             IsRequestCoroutineRunning = true;
             yield return null;
+            Sprite downloadOutput = null;
 
             while (ImageRequestQueue.Count > 0)
             {
                 ImageRequest currentRequest = ImageRequestQueue.Dequeue();
-                Sprite output = Texture2DToSprite(DownloadImage(currentRequest.UrlToImage));
-                currentRequest.Callback.Invoke(output);
+
+                if (currentRequest.IsRequestActive == true)
+                {
+                    downloadOutput = Utils.Texture2DToSprite(currentRequest.DownloadImage());
+                    currentRequest.Callback.Invoke(downloadOutput);
+                }
             }
 
             IsRequestCoroutineRunning = false;
-        }
-        private Texture2D DownloadImage (string imageUrl)
-        {
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl);
-            request.SendWebRequest();
-            return ((DownloadHandlerTexture)request.downloadHandler).texture;
-        }
-
-        private Sprite Texture2DToSprite (Texture2D source)
-        {
-            return Sprite.Create(source, new Rect(0.0f, 0.0f, source.width, source.height), Vector2.one / 2, 100.0f);
         }
     }
 }
