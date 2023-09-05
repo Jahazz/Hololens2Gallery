@@ -35,8 +35,12 @@ namespace Gallery.FlickrAPIIntegration.Mediator
         {
             yield return DownloadImageAndWaitForFinish();
 
-            Texture2D downloadedTexture = ((DownloadHandlerTexture)CurrentRequest.downloadHandler).texture;
-            Callback.Invoke(Utils.Texture2DToSprite(downloadedTexture));
+            if (CurrentRequest != null)
+            {
+                Texture2D downloadedTexture = ((DownloadHandlerTexture)CurrentRequest.downloadHandler).texture;
+                Callback.Invoke(Utils.Texture2DToSprite(downloadedTexture));
+            }
+            
         }
 
         private IEnumerator DownloadImageAndWaitForFinish ()
