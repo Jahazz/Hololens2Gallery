@@ -1,5 +1,6 @@
 using Codebase.MVC;
 using Gallery.FlickrAPIIntegration;
+using Gallery.Singletons;
 using UnityEngine;
 
 namespace Gallery.GUI
@@ -41,7 +42,12 @@ namespace Gallery.GUI
         public void SetSearchText (string searchText)
         {
             SearchText = searchText;
-            CurrentView.SetSearchText(searchText);
+            CurrentView.SetSearchText(SearchText);
+        }
+
+        public void InitializeSearch ()
+        {
+            SingletonContainer.Instance.UiManagerInstance.ImageListControllerInstance.StartSearchForImages(SearchText, ElementCount);
         }
     }
 }

@@ -21,5 +21,10 @@ namespace Gallery.GUI
         {
             CurrentModel.SetSearchText(text);
         }
+
+        public void HandleOnSearchButtonClick ()
+        {
+            CurrentModel.InitializeSearch();
+        }
     }
 }

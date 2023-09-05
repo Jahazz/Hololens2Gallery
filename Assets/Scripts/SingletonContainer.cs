@@ -10,6 +10,8 @@ namespace Gallery.Singletons
     {
         [field: SerializeField]
         public NetworkingMediator NetworkingMediatorInstance { get; private set; }
+        [field: SerializeField]
+        public UiManager UiManagerInstance { get; private set; }
     }
 }
 
