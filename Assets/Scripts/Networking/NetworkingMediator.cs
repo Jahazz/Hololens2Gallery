@@ -30,6 +30,7 @@ namespace Gallery.FlickrAPIIntegration.Mediator
             {
                 StartCoroutine(HandleImageRequestQueue());
             }
+
             return request;
         }
 
@@ -45,10 +46,11 @@ namespace Gallery.FlickrAPIIntegration.Mediator
 
         private IEnumerator SearchForPhotosByNameCoroutine (string queryText, int maxItemCount, Action<List<Photo>> callback)
         {
-            yield return null;
             PhotosSearchRequest request = RequestFactory.GetPhotosSearchRequest(queryText, maxItemCount);
+
             Task<PhotosSearchResponse> asyncQuery = PhotosSearch.Execute(FlickrClient, request);
-            asyncQuery.Wait();
+            Task.Run(() => asyncQuery);
+            yield return new WaitUntil(() => asyncQuery.IsCompleted);
             callback?.Invoke(asyncQuery.Result.PhotoCollection);
         }
 
@@ -56,16 +58,15 @@ namespace Gallery.FlickrAPIIntegration.Mediator
         {
             IsRequestCoroutineRunning = true;
             yield return null;
-            Sprite downloadOutput = null;
+            ImageRequest currentRequest;
 
             while (ImageRequestQueue.Count > 0)
             {
-                ImageRequest currentRequest = ImageRequestQueue.Dequeue();
+                currentRequest = ImageRequestQueue.Dequeue();
 
                 if (currentRequest.IsRequestActive == true)
                 {
-                    downloadOutput = Utils.Texture2DToSprite(currentRequest.DownloadImage());
-                    currentRequest.Callback.Invoke(downloadOutput);
+                    yield return currentRequest.DownloadImageAndCallback();
                 }
             }
 

@@ -1,4 +1,6 @@
+using Codebase.Utils;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -29,18 +31,19 @@ namespace Gallery.FlickrAPIIntegration.Mediator
             CurrentRequest = null;
         }
 
-        internal Texture2D DownloadImage ()
+        internal IEnumerator DownloadImageAndCallback ()
         {
-            Texture2D output = null;
+            yield return DownloadImageAndWaitForFinish();
+
+            Texture2D downloadedTexture = ((DownloadHandlerTexture)CurrentRequest.downloadHandler).texture;
+            Callback.Invoke(Utils.Texture2DToSprite(downloadedTexture));
+        }
+
+        private IEnumerator DownloadImageAndWaitForFinish ()
+        {
             CurrentRequest = UnityWebRequestTexture.GetTexture(UrlToImage);
-            CurrentRequest.SendWebRequest();
-
-            if (IsRequestActive == true)
-            {
-                output = ((DownloadHandlerTexture)CurrentRequest.downloadHandler).texture;
-            }
-
-            return output;
+            UnityWebRequestAsyncOperation WebRequest = CurrentRequest.SendWebRequest();
+            yield return WebRequest;
         }
     }
 }
