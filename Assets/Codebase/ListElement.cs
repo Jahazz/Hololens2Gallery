@@ -22,7 +22,7 @@ namespace Codebase.MVC.List
             CurrentTransform = GetComponent<RectTransform>();
         }
 
-        public void OnBeginDrag (PointerEventData eventData)
+        public virtual void OnBeginDrag (PointerEventData eventData)
         {
             if (IsDraggingSetUp == true)
             {
@@ -30,7 +30,7 @@ namespace Codebase.MVC.List
             }
         }
 
-        public void OnDrop (PointerEventData eventData)
+        public virtual void OnDrop (PointerEventData eventData)
         {
             if (IsDraggingSetUp == true)
             {
@@ -38,7 +38,7 @@ namespace Codebase.MVC.List
             }
         }
 
-        public void OnDrag (PointerEventData eventData)
+        public virtual void OnDrag (PointerEventData eventData)
         {
             if (IsDraggingSetUp == true)
             {
