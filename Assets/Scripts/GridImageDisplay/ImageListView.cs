@@ -9,7 +9,7 @@ namespace Gallery.GUI
     public class ImageListView : ListView<ImageListElement, SingleImageData>
     {
         [field: SerializeField]
-        private GameObject SpinnerInstance { get; set; }
+        private ProgressIndicatorOrbsRotator SpinnerInstance { get; set; }
         [field: SerializeField]
         private GameObject ListInstance { get; set; }
         [field: SerializeField]
@@ -17,7 +17,17 @@ namespace Gallery.GUI
 
         public void SetSpinnerActive (bool isEnabled)
         {
-            SpinnerInstance.SetActive(isEnabled);
+            SpinnerInstance.gameObject.SetActive(isEnabled);
+
+            if (isEnabled)
+            {
+                SpinnerInstance.OpenAsync();
+            }
+            else
+            {
+                SpinnerInstance.CloseAsync();
+            }
+
             ListInstance.SetActive(!isEnabled);
         }
 

@@ -11,5 +11,14 @@ namespace Gallery.Singletons
         public ImageListController ImageListControllerInstance { get; private set; }
         [field: SerializeField]
         public SearchMenuController SearchMenuControllerInstance { get; private set; }
+
+        [field: Space]
+        [field: SerializeField]
+        private SingleImageDisplayController SingleImagePrefab { get; set; }
+
+        public void ShowSingleImage (SingleImageData imageData)
+        {
+            Instantiate(SingleImagePrefab).Initialize(imageData);
+        }
     }
 }
