@@ -452,7 +452,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954651851293227}
   - component: {fileID: 6059954651851293228}
-  - component: {fileID: 6059954651851293229}
   - component: {fileID: 6059954651851293226}
   m_Layer: 0
   m_Name: TextMeshPro
@@ -523,14 +522,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954651851293229
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954651851293224}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954651851293226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +624,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954651867374303}
   - component: {fileID: 6059954651867374288}
-  - component: {fileID: 6059954651867374289}
   - component: {fileID: 6059954651867374302}
   m_Layer: 0
   m_Name: Title
@@ -704,14 +694,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954651867374289
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954651867374300}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954651867374302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1011,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954652137724682}
   - component: {fileID: 6059954652137724684}
-  - component: {fileID: 6059954652137724685}
   - component: {fileID: 6059954652137724687}
   m_Layer: 5
   m_Name: MessageText
@@ -1100,14 +1081,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954652137724685
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954652137724683}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954652137724687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,7 +2127,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954652710847626}
   - component: {fileID: 6059954652710847631}
-  - component: {fileID: 6059954652710847628}
   - component: {fileID: 6059954652710847629}
   m_Layer: 0
   m_Name: TextMeshPro
@@ -2225,14 +2197,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954652710847628
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954652710847627}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954652710847629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3826,7 +3790,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954653152273497}
   - component: {fileID: 6059954653152273511}
-  - component: {fileID: 6059954653152273510}
   - component: {fileID: 6059954653152273508}
   m_Layer: 5
   m_Name: ProgressText
@@ -3897,14 +3860,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954653152273510
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954653152273509}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954653152273508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4167,7 +4122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954653224280184}
   - component: {fileID: 6059954653224280189}
-  - component: {fileID: 6059954653224280186}
   - component: {fileID: 6059954653224280187}
   m_Layer: 0
   m_Name: TextMeshPro
@@ -4238,14 +4192,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954653224280186
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954653224280185}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954653224280187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4383,7 +4329,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6059954653277843798}
   - component: {fileID: 6059954653277843787}
-  - component: {fileID: 6059954653277843784}
   - component: {fileID: 6059954653277843785}
   m_Layer: 0
   m_Name: TextMeshPro
@@ -4454,14 +4399,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &6059954653277843784
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059954653277843799}
-  m_CullTransparentMesh: 0
 --- !u!114 &6059954653277843785
 MonoBehaviour:
   m_ObjectHideFlags: 0

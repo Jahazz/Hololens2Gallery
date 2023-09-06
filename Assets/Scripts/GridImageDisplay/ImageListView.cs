@@ -6,18 +6,14 @@ using UnityEngine;
 
 namespace Gallery.GUI
 {
-    public class ImageListView : ListView<ImageListElement, ImageListElementData>
+    public class ImageListView : ListView<ImageListElement, SingleImageData>
     {
         [field: SerializeField]
         private GameObject SpinnerInstance { get; set; }
         [field: SerializeField]
         private GameObject ListInstance { get; set; }
         [field: SerializeField]
-        private GridObjectCollection GridCollectionInstance { get; set; }
-        [field: SerializeField]
-        private ScrollingObjectCollection ScrollingObjectCollectionInstance { get; set; }
-        [field: SerializeField]
-        private Transform ScrollableTransform { get; set; }
+        private AudioSource AudioSourceInstance { get; set; }
 
         public void SetSpinnerActive (bool isEnabled)
         {
@@ -25,17 +21,11 @@ namespace Gallery.GUI
             ListInstance.SetActive(!isEnabled);
         }
 
-        public void UpdateCollectionVisuals ()
+        public override ImageListElement AddNewItem (SingleImageData elementData)
         {
-            StartCoroutine(UpdateCoroutineInNextFrame());
-        }
-
-        private IEnumerator UpdateCoroutineInNextFrame ()
-        {
-            yield return 0;
-            GridCollectionInstance.UpdateCollection();
-            ScrollingObjectCollectionInstance.UpdateContent();
-            ScrollingObjectCollectionInstance.MoveToIndex(0, false);
+            ImageListElement output = base.AddNewItem(elementData);
+            output.InitializeAudio(AudioSourceInstance);
+            return output;
         }
     }
 }

@@ -2,11 +2,21 @@ using Codebase.MVC.List;
 
 namespace Gallery.GUI
 {
-    public class ImageListController : ListController<ImageListElement, ImageListElementData, ImageListView, ImageListModel>
+    public class ImageListController : ListController<ImageListElement, SingleImageData, ImageListView, ImageListModel>
     {
         public void StartSearchForImages (string textToSearch, int maxImagecount)
         {
             CurrentModel.GetImageList(textToSearch, maxImagecount);
+        }
+
+        public void LoadImages ()
+        {
+            CurrentModel.LoadImages();
+        }
+
+        public void SaveList ()
+        {
+            CurrentModel.SaveCurrentImageList();
         }
     }
 }
