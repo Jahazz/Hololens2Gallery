@@ -22,6 +22,8 @@ namespace Gallery.GUI
         private AudioClip OnPointerDownClip { get; set; }
         [field: SerializeField]
         private AudioClip OnPointerUpClip { get; set; }
+        [field: SerializeField]
+        private EventPasser EventPasserInstance { get; set; }
 
         private SingleImageData ElementData { get; set; }
         private ImageRequest CurrentImageRequest { get; set; }
@@ -38,6 +40,11 @@ namespace Gallery.GUI
 
             Utils.AddEventTriggerListener(EventTriggerInstance, EventTriggerType.PointerDown, HandleOnPointerDown);
             Utils.AddEventTriggerListener(EventTriggerInstance, EventTriggerType.PointerUp, HandleOnPointerUp);
+        }
+
+        public void InitializeScrollRect (ScrollRect scrollRectInstance)
+        {
+            EventPasserInstance.Initialzie(scrollRectInstance.gameObject);
         }
 
         public void HandleOnPointerDown (PointerEventData data)
