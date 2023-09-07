@@ -8,10 +8,10 @@ namespace Gallery.GUI
 {
     public class SingleImageDisplayModel : BaseModel<SingleImageDisplayView>
     {
-        private SingleImageData ImageData { get; set; }
+        private SinglePhotoData ImageData { get; set; }
         private ImageRequest CurrentImageRequest { get; set; }
 
-        public void Initialize (SingleImageData imageData)
+        public void Initialize (SinglePhotoData imageData)
         {
             ImageData = imageData;
             InitializeRenderer();
@@ -29,14 +29,14 @@ namespace Gallery.GUI
 
         private void InitializeRenderer ()
         {
-            if (ImageData.ThumbnailSprite != null)
+            if (ImageData.ThumbnailImage.Sprite != null)
             {
-                SetSpriteSource(ImageData.ThumbnailSprite);
+                SetSpriteSource(ImageData.ThumbnailImage.Sprite);
             }
             else
             {
                 CurrentView.SetLoadingActive(true);
-                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ImageData.ThumbnailUrl, SetSpriteSource);
+                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ImageData.ThumbnailImage.Url, SetSpriteSource);
             }
         }
 

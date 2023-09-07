@@ -15,7 +15,7 @@ namespace Gallery.Singletons
         [field: SerializeField]
         private SingleImageDisplayController SingleImagePrefab { get; set; }
 
-        public void ShowSingleImage (SingleImageData imageData)
+        public void ShowSingleImage (SinglePhotoData imageData)
         {
             Instantiate(SingleImagePrefab).Initialize(imageData);
         }

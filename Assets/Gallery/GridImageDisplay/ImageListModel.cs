@@ -7,7 +7,7 @@ using Gallery.Data;
 
 namespace Gallery.GUI
 {
-    public class ImageListModel : ListModel<ImageListElement, SingleImageData, ImageListView>
+    public class ImageListModel : ListModel<ImageListElement, SinglePhotoData, ImageListView>
     {
         public void GetImageList (string textToSearch, int maxImagecount)
         {
@@ -17,21 +17,21 @@ namespace Gallery.GUI
 
         public void PopulateList (List<Photo> sourcePhotoDataCollection)
         {
-            List<SingleImageData> singleImagesCollection = new List<SingleImageData>();
+            List<SinglePhotoData> singleImagesCollection = new List<SinglePhotoData>();
 
             foreach (Photo sourcePhotoData in sourcePhotoDataCollection)
             {
-                singleImagesCollection.Add(new SingleImageData(sourcePhotoData));
+                singleImagesCollection.Add(new SinglePhotoData(sourcePhotoData));
             }
 
             PopulateList(singleImagesCollection);
         }
 
-        public void PopulateList (List<SingleImageData> sourcePhotoDataCollection)
+        public void PopulateList (List<SinglePhotoData> sourcePhotoDataCollection)
         {
             CurrentView.ClearList();
 
-            foreach (SingleImageData sourcePhotoData in sourcePhotoDataCollection)
+            foreach (SinglePhotoData sourcePhotoData in sourcePhotoDataCollection)
             {
                 CurrentView.AddNewItem(sourcePhotoData);
             }
@@ -41,7 +41,7 @@ namespace Gallery.GUI
 
         public void SaveCurrentImageList ()
         {
-            SaveUtils.SaveCurrentPhotos(new List<SingleImageData>(CurrentView.ContainingElementsCollection.Keys));
+            SaveUtils.SaveCurrentPhotos(new List<SinglePhotoData>(CurrentView.ContainingElementsCollection.Keys));
         }
 
         public void LoadImages ()

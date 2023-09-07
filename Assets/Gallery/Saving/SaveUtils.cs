@@ -12,26 +12,26 @@ namespace Gallery.Saving
         private const string PNG_WILDCARD = "*.png";
         private const string SAVE_DIRECTORY = "save";
 
-        public static void SaveCurrentPhotos (List<SingleImageData> listToSave)
+        public static void SaveCurrentPhotos (List<SinglePhotoData> listToSave)
         {
             string path = Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY);
             SavePhotos(ComposePhotoList(listToSave), path);
         }
 
-        public static List<SingleImageData> LoadImages ()
+        public static List<SinglePhotoData> LoadImages ()
         {
             return LoadPhotos(Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY));
         }
 
-        private static List<Sprite> ComposePhotoList (List<SingleImageData> elementList)
+        private static List<Sprite> ComposePhotoList (List<SinglePhotoData> elementList)
         {
             List<Sprite> output = new List<Sprite>();
-            Sprite biggerSprite;
+            //Sprite biggerSprite;
 
-            foreach (SingleImageData singleElement in elementList)
+            foreach (SinglePhotoData singleElement in elementList)
             {
-                biggerSprite = singleElement.MediumSprite != null ? singleElement.MediumSprite : singleElement.ThumbnailSprite;
-                output.Add(biggerSprite);
+                //biggerSprite = singleElement.MediumSprite != null ? singleElement.MediumSprite : singleElement.ThumbnailSprite;
+                //output.Add(biggerSprite);
             }
 
             return output;
@@ -63,14 +63,14 @@ namespace Gallery.Saving
             }
         }
 
-        public static List<SingleImageData> LoadPhotos (string path)
+        public static List<SinglePhotoData> LoadPhotos (string path)
         {
-            List<SingleImageData> output = new List<SingleImageData>();
+            List<SinglePhotoData> output = new List<SinglePhotoData>();
             DirectoryInfo currentDirectory = new DirectoryInfo(path);
 
             foreach (FileInfo file in currentDirectory.GetFiles(PNG_WILDCARD))
             {
-                output.Add(new SingleImageData(LoadPhoto(path, file.FullName)));
+               // output.Add(new SinglePhotoData(LoadPhoto(path, file.FullName)));
             }
 
             return output;

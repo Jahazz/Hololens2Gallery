@@ -6,7 +6,7 @@ using Gallery.Data;
 
 namespace Gallery.GUI
 {
-    public class ImageListView : ListView<ImageListElement, SingleImageData>
+    public class ImageListView : ListView<ImageListElement, SinglePhotoData>
     {
         [field: SerializeField]
         private ProgressIndicatorOrbsRotator SpinnerInstance { get; set; }
@@ -37,7 +37,7 @@ namespace Gallery.GUI
             }
         }
 
-        public override ImageListElement AddNewItem (SingleImageData elementData)
+        public override ImageListElement AddNewItem (SinglePhotoData elementData)
         {
             ImageListElement output = base.AddNewItem(elementData);
 

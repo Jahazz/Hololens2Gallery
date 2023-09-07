@@ -10,7 +10,7 @@ using Codebase.EventPassing;
 
 namespace Gallery.GUI
 {
-    public class ImageListElement : ListElement<SingleImageData>
+    public class ImageListElement : ListElement<SinglePhotoData>
     {
         [field: SerializeField]
         private Image ImageInstance { get; set; }
@@ -27,11 +27,11 @@ namespace Gallery.GUI
         [field: SerializeField]
         private EventPasser EventPasserInstance { get; set; }
 
-        private SingleImageData ElementData { get; set; }
+        private SinglePhotoData ElementData { get; set; }
         private ImageRequest CurrentImageRequest { get; set; }
         private AudioSource AudioSourceInstance { get; set; }
 
-        public override void Initialize (SingleImageData elementData)
+        public override void Initialize (SinglePhotoData elementData)
         {
             ElementData = elementData;
         }
@@ -72,17 +72,17 @@ namespace Gallery.GUI
         {
             SetSpinnerActive(true);
 
-            if (ElementData.MediumSprite != null)
+            if (ElementData.ProperImage.Sprite != null)
             {
-                SetSpriteSource(ElementData.MediumSprite);
+                SetSpriteSource(ElementData.ProperImage.Sprite);
             }
-            else if (ElementData.ThumbnailSprite != null)
+            else if (ElementData.ThumbnailImage.Sprite != null)
             {
-                SetSpriteSource(ElementData.ThumbnailSprite);
+                SetSpriteSource(ElementData.ThumbnailImage.Sprite);
             }
             else
             {
-                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ElementData.ThumbnailUrl, HandleThumbnailResponse);
+                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ElementData.ThumbnailImage.Url, HandleThumbnailResponse);
             }
         }
 
@@ -90,8 +90,8 @@ namespace Gallery.GUI
         {
             if (loadedSprite != null)
             {
-                ElementData.ThumbnailSprite = loadedSprite;
-                SetSpriteSource(ElementData.ThumbnailSprite);
+                ElementData.ThumbnailImage.Sprite = loadedSprite;
+                SetSpriteSource(ElementData.ThumbnailImage.Sprite);
             }
         }
 
