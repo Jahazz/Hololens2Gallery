@@ -5399,6 +5399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NetworkingMediatorInstance>k__BackingField: {fileID: 803296671}
   <UiManagerInstance>k__BackingField: {fileID: 1341844721}
+  <DialogManagerInstance>k__BackingField: {fileID: 0}
 --- !u!4 &753676894
 Transform:
   m_ObjectHideFlags: 0
@@ -5413,6 +5414,7 @@ Transform:
   m_Children:
   - {fileID: 803296672}
   - {fileID: 1341844722}
+  - {fileID: 1214919677}
   m_Father: {fileID: 434828299}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9977,6 +9979,61 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1214919676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214919677}
+  - component: {fileID: 1214919678}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214919677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214919676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 753676894}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214919678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214919676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c84d52a23c20944dbdf80f97c7f93a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SaveSuccessLabel>k__BackingField: Save succesfull.
+  <SaveUnknownLabel>k__BackingField: Unknow error has occured. Check logger for more
+    info.
+  <SaveEmptyGalleryLabel>k__BackingField: There is no gallery to save.
+  <SaveTitle>k__BackingField: 'Save result:'
+  <LoadSuccessLabel>k__BackingField: Load succesfull.
+  <LoadUnknownLabel>k__BackingField: Unknow error has occured. Check logger for more
+    info.
+  <LoadNoFileLabel>k__BackingField: There is no existing save.
+  <LoadTitle>k__BackingField: 'Load result:'
+  <DialogPrefab>k__BackingField: {fileID: 2680377478557818543, guid: 7cbd3024f8f162e4bae324d1b2f66bcc, type: 3}
 --- !u!1 &1216654194
 GameObject:
   m_ObjectHideFlags: 0
@@ -10512,6 +10569,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ImageListControllerInstance>k__BackingField: {fileID: 6051813617442148123}
   <SearchMenuControllerInstance>k__BackingField: {fileID: 1131490614}
+  <SaveButtonInstance>k__BackingField: {fileID: 0}
+  <LoadButtonInstance>k__BackingField: {fileID: 0}
   <SingleImagePrefab>k__BackingField: {fileID: 6059954653222689342, guid: 408ed165467ec3b42a7e2987f0e983eb, type: 3}
 --- !u!4 &1341844722
 Transform:

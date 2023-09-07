@@ -1,7 +1,6 @@
 using Codebase;
 using Gallery.FlickrAPIIntegration.Mediator;
-using System.Collections;
-using System.Collections.Generic;
+using Gallery.GUI;
 using UnityEngine;
 
 namespace Gallery.Singletons
@@ -12,6 +11,8 @@ namespace Gallery.Singletons
         public NetworkingMediator NetworkingMediatorInstance { get; private set; }
         [field: SerializeField]
         public UiManager UiManagerInstance { get; private set; }
+        [field: SerializeField]
+        public DialogManager DialogManagerInstance { get; private set; }
     }
 }
 

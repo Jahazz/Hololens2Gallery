@@ -16,7 +16,14 @@ namespace Gallery.Singletons
 
         [field: Space]
         [field: SerializeField]
+        private MenuButton SaveButtonInstance { get; set; }
+        [field: SerializeField]
+        private MenuButton LoadButtonInstance { get; set; }
+
+        [field: Space]
+        [field: SerializeField]
         private SingleImageDisplayController SingleImagePrefab { get; set; }
+
 
         public void ShowSingleImage (SinglePhotoData imageData)
         {
@@ -40,12 +47,19 @@ namespace Gallery.Singletons
 
         private IEnumerator SaveCoroutine ()
         {
+            SaveButtonInstance.SetLoadingState(true);
+
             yield return null;
             SaveOutputType saveOutput = SaveUtils.SaveCurrentPhotos(ImageListControllerInstance.GetCurrentPhotoCollection());
+
+            SaveButtonInstance.SetLoadingState(false);
+            SingletonContainer.Instance.DialogManagerInstance.ShowDialog(saveOutput);
         }
 
         private IEnumerator LoadCoroutine ()
         {
+            LoadButtonInstance.SetLoadingState(true);
+
             yield return null;
             List<SinglePhotoData> output;
             LoadOutputType loadOutput = SaveUtils.LoadImages(out output);
@@ -54,6 +68,9 @@ namespace Gallery.Singletons
             {
                 ImageListControllerInstance.SetupCollection(output);
             }
+
+            SingletonContainer.Instance.DialogManagerInstance.ShowDialog(loadOutput);
+            LoadButtonInstance.SetLoadingState(false);
         }
     }
 }
