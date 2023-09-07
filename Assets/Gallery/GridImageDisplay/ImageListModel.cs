@@ -39,14 +39,9 @@ namespace Gallery.GUI
             CurrentView.SetSpinnerActive(false);
         }
 
-        public void SaveCurrentImageList ()
+        public List<SinglePhotoData> GetCurrentPhotoCollection ()
         {
-            SaveUtils.SaveCurrentPhotos(new List<SinglePhotoData>(CurrentView.ContainingElementsCollection.Keys));
-        }
-
-        public void LoadImages ()
-        {
-            PopulateList(SaveUtils.LoadImages());
+            return new List<SinglePhotoData>(CurrentView.ContainingElementsCollection.Keys);
         }
     }
 }

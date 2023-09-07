@@ -14,6 +14,7 @@ namespace Gallery.GUI
         public void Initialize (SinglePhotoData imageData)
         {
             ImageData = imageData;
+            CurrentView.SetTitle(imageData.Title);
             InitializeRenderer();
         }
 

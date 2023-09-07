@@ -34,6 +34,11 @@ namespace Gallery.GUI
         public override void Initialize (SinglePhotoData elementData)
         {
             ElementData = elementData;
+
+            if (gameObject.activeSelf == true)
+            {
+                InitializeRenderer();
+            }
         }
 
         public void InitializeAudio (AudioSource audioSourceInstance)
@@ -72,14 +77,18 @@ namespace Gallery.GUI
         {
             SetSpinnerActive(true);
 
-            if (ElementData.ThumbnailImage.Sprite != null)
+            if (ElementData != null)
             {
-                SetSpriteSource(ElementData.ThumbnailImage.Sprite);
+                if (ElementData.ThumbnailImage.Sprite != null)
+                {
+                    SetSpriteSource(ElementData.ThumbnailImage.Sprite);
+                }
+                else
+                {
+                    CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ElementData.ThumbnailImage.Url, HandleThumbnailResponse);
+                }
             }
-            else
-            {
-                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ElementData.ThumbnailImage.Url, HandleThumbnailResponse);
-            }
+            
         }
 
         private void HandleThumbnailResponse (Sprite loadedSprite)

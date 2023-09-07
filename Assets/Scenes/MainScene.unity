@@ -2615,8 +2615,8 @@ Transform:
   m_Children:
   - {fileID: 38259622}
   - {fileID: 1131490611}
-  - {fileID: 753676894}
   - {fileID: 6051813617442148116}
+  - {fileID: 753676894}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5414,7 +5414,7 @@ Transform:
   - {fileID: 803296672}
   - {fileID: 1341844722}
   m_Father: {fileID: 434828299}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761123008
 GameObject:
@@ -8849,7 +8849,7 @@ GameObject:
   - component: {fileID: 1131490613}
   - component: {fileID: 1131490612}
   m_Layer: 0
-  m_Name: DisplayMenu
+  m_Name: SearchMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9405,9 +9405,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6051813617442148123}
-        m_TargetAssemblyTypeName: Gallery.GUI.ImageListController, Assembly-CSharp
-        m_MethodName: LoadImages
+      - m_Target: {fileID: 1341844721}
+        m_TargetAssemblyTypeName: Gallery.Singletons.UiManager, Assembly-CSharp
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12467,9 +12467,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6051813617442148123}
-        m_TargetAssemblyTypeName: Gallery.GUI.ImageListController, Assembly-CSharp
-        m_MethodName: SaveList
+      - m_Target: {fileID: 1341844721}
+        m_TargetAssemblyTypeName: Gallery.Singletons.UiManager, Assembly-CSharp
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14231,10 +14231,10 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1131490610}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1341844721}
+        m_TargetAssemblyTypeName: Gallery.Singletons.UiManager, Assembly-CSharp
+        m_MethodName: ShowSearchMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19292,7 +19292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Slate with blank content area
+  m_text: 'Search results:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
   m_sharedMaterial: {fileID: 21202819797275496, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
@@ -20917,7 +20917,7 @@ Transform:
   - {fileID: 6051813617361177241}
   - {fileID: 1419757167}
   m_Father: {fileID: 434828299}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -15.336, y: 32.752, z: 1.675}
 --- !u!1 &6051813617442148120
 GameObject:

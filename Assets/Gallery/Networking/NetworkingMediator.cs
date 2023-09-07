@@ -5,8 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-using UnityEngine.Networking;
-using Codebase.Utils;
 
 namespace Gallery.FlickrAPIIntegration.Mediator
 {

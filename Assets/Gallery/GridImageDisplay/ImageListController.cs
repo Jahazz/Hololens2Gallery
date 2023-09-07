@@ -1,5 +1,6 @@
 using Codebase.MVC.List;
 using Gallery.Data;
+using System.Collections.Generic;
 
 namespace Gallery.GUI
 {
@@ -10,14 +11,14 @@ namespace Gallery.GUI
             CurrentModel.GetImageList(textToSearch, maxImagecount);
         }
 
-        public void LoadImages ()
+        public void SetupCollection (List<SinglePhotoData> sourcePhotoDataCollection)
         {
-            CurrentModel.LoadImages();
+            CurrentModel.PopulateList(sourcePhotoDataCollection);
         }
 
-        public void SaveList ()
+        public List<SinglePhotoData> GetCurrentPhotoCollection ()
         {
-            CurrentModel.SaveCurrentImageList();
+            return CurrentModel.GetCurrentPhotoCollection();
         }
     }
 }

@@ -5,6 +5,7 @@ using Gallery.Data;
 using Gallery.Saving.Data;
 using Codebase.IO;
 using Codebase.IO.Xml;
+using System;
 
 namespace Gallery.Saving
 {
@@ -19,38 +20,73 @@ namespace Gallery.Saving
         private const string SAVED_IMAGE_FILENAME_FORMAT = "{0}{1}{2}{3}";//filename, separator, suffix, extension
         private const string XML_FILENAME = "save.xls";
 
-        public static void SaveCurrentPhotos (List<SinglePhotoData> listToSave)
+        public static SaveOutputType SaveCurrentPhotos (List<SinglePhotoData> listToSave)
         {
-            string path = GetSavePath();
+            SaveOutputType outputType = SaveOutputType.OK;
 
-            DeleteOldSaveIfExists(path);
-            Directory.CreateDirectory(path);
-
-            GallerySaveData saveData = SavePhotos(listToSave, path);
-
-            XMLUtils.SerializeAndSave(saveData, path, XML_FILENAME);
-        }
-
-        public static List<SinglePhotoData> LoadImages ()
-        {
-            SinglePhotoData singlePhotoData;
-            List<SinglePhotoData> output = new List<SinglePhotoData>();
-
-            string path = GetSavePath();
-            GallerySaveData saveData = XMLUtils.LoadAndDeserialize<GallerySaveData>(path, XML_FILENAME);
-
-            foreach (PhotoSaveData photoData in saveData.PhotosInGalleryCollection)
+            if (listToSave != null && listToSave.Count > 0)
             {
-                singlePhotoData = new SinglePhotoData(
-                    GetImageDataFromSaveData(photoData.ThumbnailImage),
-                    GetImageDataFromSaveData(photoData.ProperImage),
-                    photoData.Title,
-                    photoData.ID
-                    );
-                output.Add(singlePhotoData);
+                try
+                {
+                    string path = GetSavePath();
+
+                    DeleteOldSaveIfExists(path);
+                    Directory.CreateDirectory(path);
+
+                    GallerySaveData saveData = SavePhotos(listToSave, path);
+
+                    XMLUtils.SerializeAndSave(saveData, path, XML_FILENAME);
+                }
+                catch (Exception exceptionData)
+                {
+                    
+                }
+            }
+            else
+            {
+                outputType = SaveOutputType.EMPTY_GALLERY;
             }
 
-            return output;
+            return outputType;
+        }
+
+        public static LoadOutputType LoadImages (out List<SinglePhotoData> output)
+        {
+            LoadOutputType outputType = LoadOutputType.OK;
+            output = new List<SinglePhotoData>();
+
+            string path = GetSavePath();
+
+            if (InputOutput.FileExists(path, XML_FILENAME) == true)
+            {
+                try
+                {
+                    SinglePhotoData singlePhotoData;
+                    GallerySaveData saveData = XMLUtils.LoadAndDeserialize<GallerySaveData>(path, XML_FILENAME);
+
+                    foreach (PhotoSaveData photoData in saveData.PhotosInGalleryCollection)
+                    {
+                        singlePhotoData = new SinglePhotoData(
+                            GetImageDataFromSaveData(photoData.ThumbnailImage),
+                            GetImageDataFromSaveData(photoData.ProperImage),
+                            photoData.Title,
+                            photoData.ID
+                            );
+                        output.Add(singlePhotoData);
+                    }
+                }
+                catch (Exception exceptionData)
+                {
+                    Debug.LogError(exceptionData.Message);
+                    outputType = LoadOutputType.UNKNOWN_ERROR;
+                }
+            }
+            else
+            {
+                outputType = LoadOutputType.NO_SAVE;
+            }
+
+            return outputType;
         }
 
         private static ImageData GetImageDataFromSaveData (SingleImageSaveData imageSaveData)

@@ -26,6 +26,11 @@ namespace Codebase.IO
                 file.Write(bytes, 0, bytes.Length);
             }
         }
+
+        public static bool FileExists (string path, string fileName)
+        {
+            return Directory.Exists(path) == true && File.Exists(Path.Combine(path, fileName)) == true;
+        }
     }
 }
 

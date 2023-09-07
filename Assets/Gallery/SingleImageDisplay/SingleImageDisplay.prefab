@@ -4098,6 +4098,7 @@ MonoBehaviour:
   <ImageInstance>k__BackingField: {fileID: 6059954652930501869}
   <WindowGameobjectInstance>k__BackingField: {fileID: 6059954653343113156}
   <LoadingIndicatorInstance>k__BackingField: {fileID: 6059954651685163289}
+  <TitleLabel>k__BackingField: {fileID: 6059954651867374302}
 --- !u!114 &6059954653222689342
 MonoBehaviour:
   m_ObjectHideFlags: 0
