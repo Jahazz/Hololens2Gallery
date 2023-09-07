@@ -29,6 +29,10 @@ namespace Gallery.FlickrAPIIntegration.Endpoints
         public string ThumbnailUrl { get; set; }
         [XmlAttribute(AttributeName = "url_c")]
         public string MediumUrl { get; set; }
+        [XmlAttribute(AttributeName = "id")]
+        public ulong ID { get; set; }
+        [XmlAttribute(AttributeName = "title")]
+        public string Title { get; set; }
     }
 
     [XmlRoot(ElementName = "FlickrRequest", Namespace = SoapConfig.NAMESPACE)]
