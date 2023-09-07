@@ -72,11 +72,7 @@ namespace Gallery.GUI
         {
             SetSpinnerActive(true);
 
-            if (ElementData.ProperImage.Sprite != null)
-            {
-                SetSpriteSource(ElementData.ProperImage.Sprite);
-            }
-            else if (ElementData.ThumbnailImage.Sprite != null)
+            if (ElementData.ThumbnailImage.Sprite != null)
             {
                 SetSpriteSource(ElementData.ThumbnailImage.Sprite);
             }
