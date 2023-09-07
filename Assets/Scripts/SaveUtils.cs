@@ -2,6 +2,7 @@ using Gallery.GUI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Gallery.Data;
 
 namespace Gallery.Saving
 {

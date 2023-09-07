@@ -1,6 +1,5 @@
 using Gallery.GUI;
-using System.Collections;
-using System.Collections.Generic;
+using Gallery.Data;
 using UnityEngine;
 
 namespace Gallery.Singletons

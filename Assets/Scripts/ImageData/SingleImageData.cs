@@ -1,9 +1,7 @@
 using Gallery.FlickrAPIIntegration.Endpoints;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gallery.GUI
+namespace Gallery.Data
 {
     public class SingleImageData
     {

@@ -1,4 +1,5 @@
 using Codebase.MVC;
+using Gallery.Data;
 
 namespace Gallery.GUI
 {

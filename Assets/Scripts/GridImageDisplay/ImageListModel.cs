@@ -3,6 +3,7 @@ using Gallery.FlickrAPIIntegration.Endpoints;
 using Gallery.Saving;
 using Gallery.Singletons;
 using System.Collections.Generic;
+using Gallery.Data;
 
 namespace Gallery.GUI
 {

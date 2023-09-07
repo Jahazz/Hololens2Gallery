@@ -2,6 +2,7 @@ using Codebase.MVC.List;
 using Microsoft.MixedReality.Toolkit.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Gallery.Data;
 
 namespace Gallery.GUI
 {

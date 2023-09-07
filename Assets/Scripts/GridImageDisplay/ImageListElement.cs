@@ -2,6 +2,7 @@ using Codebase.MVC.List;
 using Codebase.Utils;
 using Gallery.FlickrAPIIntegration.Mediator;
 using Gallery.Singletons;
+using Gallery.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

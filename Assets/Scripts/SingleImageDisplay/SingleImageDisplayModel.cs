@@ -1,7 +1,8 @@
 using Codebase.MVC;
+using UnityEngine;
 using Gallery.FlickrAPIIntegration.Mediator;
 using Gallery.Singletons;
-using UnityEngine;
+using Gallery.Data;
 
 namespace Gallery.GUI
 {
