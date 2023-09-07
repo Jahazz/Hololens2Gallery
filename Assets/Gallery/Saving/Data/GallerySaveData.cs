@@ -4,6 +4,6 @@ namespace Gallery.Saving.Data
 {
     public class GallerySaveData
     {
-        public List<SavePhotoData> PhotosInGalleryCollection { get; set; } = new List<SavePhotoData>();
+        public List<PhotoSaveData> PhotosInGalleryCollection { get; set; } = new List<PhotoSaveData>();
     }
 }

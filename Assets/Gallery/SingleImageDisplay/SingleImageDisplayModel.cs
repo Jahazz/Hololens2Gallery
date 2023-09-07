@@ -29,21 +29,22 @@ namespace Gallery.GUI
 
         private void InitializeRenderer ()
         {
-            if (ImageData.ThumbnailImage.Sprite != null)
+            if (ImageData.ProperImage.Sprite != null)
             {
-                SetSpriteSource(ImageData.ThumbnailImage.Sprite);
+                SetSpriteSource(ImageData.ProperImage.Sprite);
             }
             else
             {
                 CurrentView.SetLoadingActive(true);
-                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ImageData.ThumbnailImage.Url, SetSpriteSource);
+                CurrentImageRequest = SingletonContainer.Instance.NetworkingMediatorInstance.RequestImageFromUrl(ImageData.ProperImage.Url, SetSpriteSource);
             }
         }
 
         private void SetSpriteSource (Sprite sourceImage)
         {
+            ImageData.ProperImage.Sprite = sourceImage;
             CurrentView.SetLoadingActive(false);
-            CurrentView.SetImage(sourceImage);
+            CurrentView.SetImage(ImageData.ProperImage.Sprite);
         }
 
         private void UpdateProgressIfNeeded ()

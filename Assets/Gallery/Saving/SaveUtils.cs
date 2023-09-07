@@ -1,8 +1,10 @@
-using Gallery.GUI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Gallery.Data;
+using Gallery.Saving.Data;
+using Codebase.IO;
+using Codebase.IO.Xml;
 
 namespace Gallery.Saving
 {
@@ -11,83 +13,124 @@ namespace Gallery.Saving
         private const string PNG_EXTENSION = ".png";
         private const string PNG_WILDCARD = "*.png";
         private const string SAVE_DIRECTORY = "save";
+        private const string SAVE_NAME_SEPARATOR = "_";
+        private const string THUMBNAIL_SUFFIX = "thumbnail";
+        private const string PROPER_IMAGE_SUFFIX = "proper";
+        private const string SAVED_IMAGE_FILENAME_FORMAT = "{0}{1}{2}{3}";//filename, separator, suffix, extension
+        private const string XML_FILENAME = "save.xls";
 
         public static void SaveCurrentPhotos (List<SinglePhotoData> listToSave)
         {
-            string path = Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY);
-            SavePhotos(ComposePhotoList(listToSave), path);
+            string path = GetSavePath();
+
+            DeleteOldSaveIfExists(path);
+            Directory.CreateDirectory(path);
+
+            GallerySaveData saveData = SavePhotos(listToSave, path);
+
+            XMLUtils.SerializeAndSave(saveData, path, XML_FILENAME);
         }
 
         public static List<SinglePhotoData> LoadImages ()
         {
-            return LoadPhotos(Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY));
-        }
+            SinglePhotoData singlePhotoData;
+            List<SinglePhotoData> output = new List<SinglePhotoData>();
 
-        private static List<Sprite> ComposePhotoList (List<SinglePhotoData> elementList)
-        {
-            List<Sprite> output = new List<Sprite>();
-            //Sprite biggerSprite;
+            string path = GetSavePath();
+            GallerySaveData saveData = XMLUtils.LoadAndDeserialize<GallerySaveData>(path, XML_FILENAME);
 
-            foreach (SinglePhotoData singleElement in elementList)
+            foreach (PhotoSaveData photoData in saveData.PhotosInGalleryCollection)
             {
-                //biggerSprite = singleElement.MediumSprite != null ? singleElement.MediumSprite : singleElement.ThumbnailSprite;
-                //output.Add(biggerSprite);
+                singlePhotoData = new SinglePhotoData(
+                    GetImageDataFromSaveData(photoData.ThumbnailImage),
+                    GetImageDataFromSaveData(photoData.ProperImage),
+                    photoData.Title,
+                    photoData.ID
+                    );
+                output.Add(singlePhotoData);
             }
 
             return output;
         }
 
-        private static void SavePhotos (List<Sprite> photoListToSave, string path)
+        private static ImageData GetImageDataFromSaveData (SingleImageSaveData imageSaveData)
+        {
+            ImageData output = new ImageData(imageSaveData.Url);
+
+            if (imageSaveData.Filename != null)
+            {
+                output.Sprite = GetSpriteFromPngByteArray(InputOutput.LoadBytes(GetSavePath(), imageSaveData.Filename));
+            }
+
+            return output;
+        }
+
+        private static string GetSavePath ()
+        {
+            return Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY);
+        }
+
+        private static GallerySaveData SavePhotos (List<SinglePhotoData> listToSave, string path)
+        {
+
+            GallerySaveData saveData = new GallerySaveData();
+
+            PhotoSaveData createdPhotoData;
+
+            foreach (SinglePhotoData singlePhoto in listToSave)
+            {
+                createdPhotoData = new PhotoSaveData();
+                createdPhotoData.ID = singlePhoto.ID;
+                createdPhotoData.Title = singlePhoto.Title;
+
+                createdPhotoData.ThumbnailImage = SaveSingleImageData(singlePhoto.ThumbnailImage, createdPhotoData.ID, path, THUMBNAIL_SUFFIX);
+                createdPhotoData.ProperImage = SaveSingleImageData(singlePhoto.ProperImage, createdPhotoData.ID, path, PROPER_IMAGE_SUFFIX);
+
+                saveData.PhotosInGalleryCollection.Add(createdPhotoData);
+            }
+
+            return saveData;
+        }
+
+        private static void DeleteOldSaveIfExists (string path)
         {
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
             }
-
-            Directory.CreateDirectory(path);
-            int i = 0;
-
-            foreach (Sprite singlePhoto in photoListToSave)
-            {
-                SavePhoto(path, i+++ PNG_EXTENSION, singlePhoto);
-            }
         }
 
-
-        private static void SavePhoto (string path, string fileName, Sprite spriteToSave)
+        private static string GetFilenameForImage (ulong id, string suffix)
         {
-            using (FileStream file = new FileStream(Path.Combine(path, fileName), FileMode.Create, FileAccess.Write, FileShare.Write))
-            {
-                byte[] pngEncodedSprite = spriteToSave.texture.EncodeToPNG();
-                file.Write(pngEncodedSprite, 0, pngEncodedSprite.Length);
-            }
+            return string.Format(SAVED_IMAGE_FILENAME_FORMAT, id, SAVE_NAME_SEPARATOR, suffix, PNG_EXTENSION);
         }
 
-        public static List<SinglePhotoData> LoadPhotos (string path)
+        private static SingleImageSaveData SaveSingleImageData (ImageData dataToSave, ulong id, string path, string suffix)
         {
-            List<SinglePhotoData> output = new List<SinglePhotoData>();
-            DirectoryInfo currentDirectory = new DirectoryInfo(path);
+            SingleImageSaveData output = new SingleImageSaveData();
 
-            foreach (FileInfo file in currentDirectory.GetFiles(PNG_WILDCARD))
+            output.Url = dataToSave.Url;
+
+            if (dataToSave.Sprite != null)
             {
-               // output.Add(new SinglePhotoData(LoadPhoto(path, file.FullName)));
+                output.Filename = GetFilenameForImage(id, suffix);
+                byte[] bytedSprite = GetSpritePngByteArray(dataToSave.Sprite);
+                InputOutput.SaveBytes(bytedSprite, path, output.Filename);
             }
 
             return output;
         }
 
-        private static Sprite LoadPhoto (string path, string filename)
+        private static byte[] GetSpritePngByteArray (Sprite source)
         {
-            Sprite output = null;
+            return source.texture.EncodeToPNG();
+        }
 
-            using (FileStream file = new FileStream(Path.Combine(path, filename), FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                byte[] pngEncodedSprite = new byte[file.Length];
-                file.Read(pngEncodedSprite, 0, pngEncodedSprite.Length);
-                Texture2D texture = new Texture2D(1, 1);
-                ImageConversion.LoadImage(texture, pngEncodedSprite);
-                output = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width, texture.height) / 2);
-            }
+        private static Sprite GetSpriteFromPngByteArray (byte[] source)
+        {
+            Texture2D texture = new Texture2D(1, 1);
+            ImageConversion.LoadImage(texture, source);
+            Sprite output = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(texture.width, texture.height) / 2);
 
             return output;
         }

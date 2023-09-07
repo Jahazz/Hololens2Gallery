@@ -18,9 +18,12 @@ namespace Gallery.Data
             Title = sourcePhotoData.Title;
         }
 
-        public SinglePhotoData(Sprite sprite)
+        public SinglePhotoData (ImageData thumbnailImage, ImageData properImage, string title, ulong id)
         {
-            //MediumSprite = sprite;
+            ThumbnailImage = thumbnailImage;
+            ProperImage = properImage;
+            Title = title;
+            ID = id;
         }
     }
 }
