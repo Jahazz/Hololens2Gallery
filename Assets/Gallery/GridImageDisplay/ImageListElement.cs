@@ -6,6 +6,7 @@ using Gallery.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Codebase.EventPassing;
 
 namespace Gallery.GUI
 {
