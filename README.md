@@ -85,12 +85,12 @@ File orientation in project is feature driven with exception to Codebase. Author
 ## Modules
 
 App is divided to multiple modules (namespaces):
-GUI - MVC's responsible for data processing/displaying and user input
-Data - Data of photos containing its id, title, thumbnail and proper image. Thumbnail and proper image contain sprite and url to that image.
-Networking - Communication with flickr api https://www.flickr.com/services/api/ by soap https://en.wikipedia.org/wiki/SOAP protocol.
-Saving - Module contains save/load functionality with its own dataset classes.
-Singletons - Management of single instance objects, communication between mvcs, displaying of modals etc.
-Codebase - Highly reusable and extendable classes, utils, etc.
+- GUI - MVC's responsible for data processing/displaying and user input
+- Data - Data of photos containing its id, title, thumbnail and proper image. Thumbnail and proper image contain sprite and url to that image.
+- Networking - Communication with [flickr api](https://www.flickr.com/services/api/) over [SOAP](https://en.wikipedia.org/wiki/SOAP) protocol.
+- Saving - Module contains save/load functionality with its own dataset classes.
+- Singletons - Management of single instance objects, communication between mvcs, displaying of modals etc.
+- Codebase - Highly reusable and extendable classes, utils, etc.
 
 ### Data (`Gallery.Data`)
 
