@@ -42,20 +42,20 @@ After app load and splash screen user is presented with menu.
 <p align="center">
   <img src="https://github.com/Jahazz/Hololens2Gallery/assets/15159025/4e462c43-69bc-48c0-8b77-5c74afdcaa56" />
 </p>
-First button(from left) opens search menu. Next is save and load. 
+First button (from left) opens search menu. Next is save and load. 
 On refresh button 3D space GUI is presented. 
 <p align="center">
   <img src="https://github.com/Jahazz/Hololens2Gallery/assets/15159025/14ec72bd-524e-418f-bc29-761d67e2eec1" />
 </p>
-Here user can select count of downloaded images and type text query to search. Query can be changed by using keyboard button.
+Here user can select count of downloaded images and type text query to search. Query can be changed using keyboard button.
 <p align="center">
   <img src="https://github.com/Jahazz/Hololens2Gallery/assets/15159025/3ea44d1d-7e4e-417f-a435-9405c6d6d1f2" />
 </p>
-On pressing search button querty is sent to server, spinner is shown and after response app shows list and starts downloading thumbnails.
+On pressing search button query is sent to server, spinner is shown and after response app shows list and starts downloading thumbnails.
 <p align="center">
   <img src="https://github.com/Jahazz/Hololens2Gallery/assets/15159025/519fefa7-bec8-4ed3-9d03-ce6eb0e17db4" />
 </p>
-User can click on image to display it on higher resolution. On image click app downloads bigger version of image and shows it in separate window.
+User can click on image to display it in higher resolution. On image click app downloads bigger version of image and shows it in separate window.
 <p align="center">
   <img src="https://github.com/Jahazz/Hololens2Gallery/assets/15159025/d8a160ec-3db9-48fd-9f23-b3e33803c487" />
 </p>
@@ -76,7 +76,7 @@ User can load previosly saved images by clicking load button. Images are display
 
 ## Code formating, comments etc
 
-Project is written in self explaining(thus no comments), encapsulated code which modules try to follow KISS and SOLID principles but due to low development time few rules had to be broken. Most of parameters are adjustable in editor or have separate class with config.
+Project is written in self explaining (thus no comments), encapsulated code which modules try to follow KISS and SOLID principles but due to low development time few rules had to be broken. Most of parameters are adjustable in editor or have separate class with config.
 
 ## Files
 
@@ -84,11 +84,11 @@ File orientation in project is feature driven with exception to Codebase. Author
 
 ## Modules
 
-App is divided to multiple modules(namespaces):
+App is divided to multiple modules (namespaces):
 GUI - MVC's responsible for data processing/displaying and user input
 Data - Data of photos containing its id, title, thumbnail and proper image. Thumbnail and proper image contain sprite and url to that image.
 Networking - Communication with flickr api https://www.flickr.com/services/api/ by soap https://en.wikipedia.org/wiki/SOAP protocol.
-Saving - Module contains save/load functionality with its own dataset classes
+Saving - Module contains save/load functionality with its own dataset classes.
 Singletons - Management of single instance objects, communication between mvcs, displaying of modals etc.
 Codebase - Highly reusable and extendable classes, utils, etc.
 
@@ -98,16 +98,16 @@ Data format in app. Separated from networking and saving format to ensure expend
 
 ### Networking (`Gallery.FlickrAPIIntegration`)
 
-Module for communicating with internet. Communication with flickr api is done by Unity-SOAP framework(Tbh any framework can be used here.). Images are downloaded by use of UnityWebRequestTexture and returned as sprites. Photo lists are parsed from xml to `Gallery.FlickrAPIIntegration.Endpoints.Photo` objects. 
+Module for communicating with internet. Communication with flickr api is done by Unity-SOAP framework (Tbh any framework can be used here.). Images are downloaded by use of UnityWebRequestTexture and returned as sprites. Photo lists are parsed from xml to `Gallery.FlickrAPIIntegration.Endpoints.Photo` objects. 
 Config file is SoapConfig.cs and requests are stored in RequestFactory.cs. 
-Calls are made from `NetworkingMediator.cs` and it should be only exposed class(beside of data classes) here. 
+Calls are made from `NetworkingMediator.cs` and it should be the only exposed class (beside of data classes) here. 
 When api calls are executed in realtime, image requests utilize FIFO queue.
 To expand, simply add output format as for example in `PhotosSearchEndpoint.cs` and specify request in `RequestFactory.cs`. Example calls are in `NetworkingMediator.cs`.
 
 ### Saving (`Gallery.Saving`)
 
-Module for read/write operations. Uses its own data format to store path for images(in exception of sprites from `Gallery.Data`). 
-Both urls for thumbnails and proper image are stored and if bigger image is downloaded is stored too.
+Module for read/write operations. Uses its own data format to store path for images (in exception of sprites from `Gallery.Data`). 
+Both urls for thumbnails and proper image are stored and if bigger image is downloaded it is stored too.
 Images are stored in .png format.
 Calls should be made from `SaveUtils` static class.
 
@@ -134,30 +134,30 @@ Responsible for input of search query and calling `GridImageDisplay` on its resp
 
 #####  SingleImageDisplay
 
-Responsible for single high quality image display. When this window is opened higher quality image downloads from server
+Responsible for single high quality image display. When this window is opened higher quality image downloads from server.
 
 ### Codebase(`Codebase`)
 
 Namespace containing MVC implementation and many utilities. Highly reusable. 
 MVC setup is:
-Inherit those three scripts add them to game object, and fill its references. On Start it will initialize and proper object can be called(Controller can call model and view, model can call view)
-Also contains list MVC implementation(adding, removing, storage of elements), setup is same as mvc but additionaly object container and prefab must be specified. Also implements rearanging vertical list functionality, but its not used in this project.
+Inherit those three scripts, add them to game object and fill its references. On Start it will initialize and proper object can be called (Controller can call model and view, model can call view).
+Also contains list MVC implementation (adding, removing, storage of elements), setup is same as mvc but additionaly object container and prefab must be specified. Also implements rearanging vertical list functionality, but its not used in this project.
 Event passer is class to propagate drag events through raycast blocking IDraggable elements. Useful when dealing with problem of non scrolling button list in MRTK for example.
 
 - `InputOutput` is simple read/write class.
   
-- `SingletonMonobehaviour` allows to make monobehaviour to be singleton(sic!). It just contains static reference that is asigned on awake.
+- `SingletonMonobehaviour` allows to make monobehaviour to be singleton (sic!). It just contains static reference that is asigned on awake.
   
-- `Utils` contains few misc functions. I didnt include full utils here, only necessary ones.
+- `Utils` contains few misc functions. I didn't include full utils here, only necessary ones.
   
 - `XMLUtils` is serialization and deserialization of urls.
   
 
 ## Afterthought:
 
-Project was made in week and still needs some work. Due to lack of time, i couldnt add interfaces to all modules, window spawning positions are not best and there is almost no exception handling. Due to lack of physical Hololens app had to be tested on emulator that dont represent it very good.
+Project was made in week and still needs some work. Due to lack of time, i couldn't add interfaces to all modules, window spawning positions are not best and there is almost no exception handling. Due to lack of physical Hololens app had to be tested on emulator that doesn't represent it very good.
 
-Splash art by vexels. I had to change it but already pushed commits and build app.
+Splash art by vexels. I had to change it but already pushed commits and built app.
 
 ## License
 
